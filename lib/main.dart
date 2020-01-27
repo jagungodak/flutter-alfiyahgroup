@@ -1,4 +1,4 @@
-import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:alfiyahgroupppsfluter/utils.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanListJob.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanLogin.dart';
@@ -14,6 +14,9 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       title: 'First App',
       home: _defaultHome,
+        routes: <String, WidgetBuilder>{
+          "/SecondPage": (BuildContext context) => new HalamanListJob()
+        }
     );
 
   }
