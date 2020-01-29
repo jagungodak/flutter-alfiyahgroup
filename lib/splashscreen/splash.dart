@@ -16,6 +16,7 @@ SharedPreferences sharedPreferences;
     super.initState();
     startLaunching();
      checkLoginStatus();
+     print("tes");
   }
 
   checkLoginStatus() async {
