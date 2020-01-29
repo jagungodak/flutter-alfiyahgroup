@@ -45,6 +45,7 @@ class HalamanListJobState extends State<HalamanListJob> {
   Widget build(BuildContext context) {
     return new Scaffold(
       appBar: new AppBar(
+        backgroundColor: Colors.blue[900],
         title: new Text("Alfiyah Group Apps",
             style: TextStyle(color: Colors.amber[600])),
         actions: <Widget>[
@@ -65,8 +66,7 @@ class HalamanListJobState extends State<HalamanListJob> {
         padding: const EdgeInsets.all(10.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          
-          return new Card( 
+          return new Card(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
@@ -97,21 +97,64 @@ class HalamanListJobState extends State<HalamanListJob> {
                                 child: new Text("Task ",
                                     style: TextStyle(
                                         fontWeight: FontWeight.bold,
-                                        fontSize: 14))),
+                                        fontSize: 16))),
                             Flexible(
                                 child: new AutoSizeText(
                                     ": " + data[index]['tugas'],
                                     maxLines: 2,
-                                    style: TextStyle(fontSize: 14.0)))
+                                    style: TextStyle(fontSize: 16.0)))
                           ],
                         )),
                         _type(data[index]['type'], index),
                         _tanggal(data[index]['type'], index)
                       ],
                     )),
+                new Column(
+                  crossAxisAlignment: CrossAxisAlignment.stretch,
+                  children: <Widget>[
+                    new Container(
+                      width: double.infinity,
+                      child: new Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: <Widget>[
+                          new RaisedButton(
+                            onPressed: () {},
+                            elevation: 20.0,
+                            color: Colors.orange,
+                            child: Text("Lihat Status",
+                                style: TextStyle(
+                                    color: Colors.white,
+                                    fontSize: 15.0,
+                                    letterSpacing: 1.5)),
+                            padding: EdgeInsets.only(left: 20.0, right: 20.0),
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(0.0),
+                            ),
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 10.0),
+                            child: new RaisedButton(
+                              onPressed: () {},
+                              elevation: 20.0,
+                              color: Colors.blue[900],
+                              child: Text("Lihat Status",
+                                  style: TextStyle(
+                                      color: Colors.white,
+                                      fontSize: 15.0,
+                                      letterSpacing: 1.5)),
+                              padding: EdgeInsets.only(left: 20.0, right: 20),
+                              shape: RoundedRectangleBorder(
+                                borderRadius: BorderRadius.circular(0.0),
+                              ),
+                            ),
+                          ),
+                        ],
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
-          
           );
         },
       ),
