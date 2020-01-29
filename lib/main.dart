@@ -11,6 +11,7 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context)  {
     Widget _defaultHome = new LauncherPage();
     return MaterialApp(
+      debugShowCheckedModeBanner: false,
       title: 'First App',
       home: _defaultHome,
     );

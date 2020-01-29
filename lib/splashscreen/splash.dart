@@ -1,6 +1,10 @@
+
+import 'package:alfiyahgroupppsfluter/view/HalamanListJob.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanLogin.dart';
 import 'package:flutter/material.dart';
 import 'dart:async';
+
+import 'package:shared_preferences/shared_preferences.dart';
 class LauncherPage extends StatefulWidget {
   @override
   _LauncherPageState createState() => _LauncherPageState();
@@ -8,10 +12,21 @@ class LauncherPage extends StatefulWidget {
 
 class _LauncherPageState extends State<LauncherPage> {
   @override
-
+SharedPreferences sharedPreferences;
   void initState() {
     super.initState();
     startLaunching();
+     checkLoginStatus();
+     print("tes");
+  }
+
+  checkLoginStatus() async {
+    sharedPreferences = await SharedPreferences.getInstance();
+    if (sharedPreferences.getString("id_user") != null) {
+      Navigator.of(context).pushAndRemoveUntil(
+          MaterialPageRoute(builder: (BuildContext context) => HalamanListJob()),
+          (Route<dynamic> route) => false);
+    }
   }
 
   startLaunching() async {

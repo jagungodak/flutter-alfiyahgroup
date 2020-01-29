@@ -1,9 +1,12 @@
+
+import 'dart:isolate';
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
 import 'package:alfiyahgroupppsfluter/model/UserModel.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanListJob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:alfiyahgroupppsfluter/utils.dart';
 
 class HalamanLogin extends StatefulWidget {
   @override
@@ -43,7 +46,7 @@ class _LoginPageState extends State<HalamanLogin> {
 
   Container buttonSection() {
     return Container(
-       width: double.infinity,
+        width: double.infinity,
         height: 60.0,
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         margin: EdgeInsets.only(top: 15.0),
@@ -51,7 +54,7 @@ class _LoginPageState extends State<HalamanLogin> {
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RaisedButton(
-              onPressed:  () async {
+              onPressed: () async {
                 
                 SharedPreferences sharedPreferences =
                     await SharedPreferences.getInstance();
@@ -79,11 +82,13 @@ class _LoginPageState extends State<HalamanLogin> {
               },
               elevation: 5.0,
               color: Colors.orange,
-              child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20.0, letterSpacing: 1.5)),
+              child: Text("Sign In",
+                  style: TextStyle(
+                      color: Colors.white, fontSize: 20.0, letterSpacing: 1.5)),
               padding: EdgeInsets.all(15.0),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(4.0),
-                  ),
+                borderRadius: BorderRadius.circular(4.0),
+              ),
             ),
           ],
         ));
@@ -160,4 +165,3 @@ class _LoginPageState extends State<HalamanLogin> {
     );
   }
 }
-
