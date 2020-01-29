@@ -1,14 +1,9 @@
-import 'dart:async';
-import 'dart:convert';
-import 'dart:developer';
-import 'dart:io';
-
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
 import 'package:alfiyahgroupppsfluter/model/UserModel.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanListJob.dart';
-import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HalamanLogin extends StatefulWidget {
   @override
@@ -16,7 +11,6 @@ class HalamanLogin extends StatefulWidget {
 }
 
 class _LoginPageState extends State<HalamanLogin> {
-
   TextEditingController _usernameController = TextEditingController();
   TextEditingController _passwordController = TextEditingController();
 
@@ -37,47 +31,59 @@ class _LoginPageState extends State<HalamanLogin> {
         child: _isLoading
             ? Center(child: CircularProgressIndicator())
             : ListView(
-          children: <Widget>[
-            headerSection(),
-            textSection(),
-            buttonSection(),
-          ],
-        ),
+                children: <Widget>[
+                  headerSection(),
+                  textSection(),
+                  buttonSection(),
+                ],
+              ),
       ),
     );
   }
 
   Container buttonSection() {
     return Container(
-        width: MediaQuery.of(context).size.width,
-        height: 70.0,
+       width: double.infinity,
+        height: 60.0,
         padding: EdgeInsets.symmetric(horizontal: 15.0),
         margin: EdgeInsets.only(top: 15.0),
         child: Column(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
             RaisedButton(
-              onPressed: () async {
+              onPressed:  () async {
+                
+                SharedPreferences sharedPreferences =
+                    await SharedPreferences.getInstance();
                 setState(() => _isLoading = true);
-                var res = await ApiService().loginUser(_usernameController.text, _passwordController.text);
+                var res = await ApiService().loginUser(
+                    _usernameController.text, _passwordController.text);
+
                 setState(() => _isLoading = false);
-                UserModel listSeafood=UserModel.fromJson(res);
+                UserModel listSeafood = UserModel.fromJson(res);
                 print("DATAAAAAAAAAAAAAAAAAAAAAA:");
-                print(listSeafood.error_msg.toString()+"=>"+listSeafood.nama_user.toString()+"==>"+listSeafood.error.toString());
-                if (listSeafood.error.toString()=="false") {
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(builder: (context) => HalamanListJob()),
-                  );
+                print(listSeafood.error_msg.toString() +
+                    "=>" +
+                    listSeafood.nama_user.toString() +
+                    "==>" +
+                    listSeafood.error.toString());
+                if (listSeafood.error.toString() == "false") {
+                  sharedPreferences.setString("id_user", listSeafood.id_user);
+                  Navigator.of(context).push(
+                      MaterialPageRoute<Null>(builder: (BuildContext context) {
+                    return new HalamanListJob();
+                  }));
                 } else {
                   _showDialog(listSeafood.error_msg);
                 }
               },
-              elevation: 0.0,
-              color: Colors.purple,
-              child: Text("Sign In", style: TextStyle(color: Colors.white70)),
+              elevation: 5.0,
+              color: Colors.orange,
+              child: Text("Sign In", style: TextStyle(color: Colors.white, fontSize: 20.0, letterSpacing: 1.5)),
+              padding: EdgeInsets.all(15.0),
               shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(5.0)),
+                  borderRadius: BorderRadius.circular(4.0),
+                  ),
             ),
           ],
         ));
@@ -125,8 +131,8 @@ class _LoginPageState extends State<HalamanLogin> {
       padding: EdgeInsets.symmetric(horizontal: 20.0, vertical: 30.0),
       child: Text("Sign In",
           style: TextStyle(
-              color: Colors.white70,
-              fontSize: 40.0,
+              color: Colors.white,
+              fontSize: 60.0,
               fontWeight: FontWeight.bold)),
     );
   }
@@ -153,6 +159,5 @@ class _LoginPageState extends State<HalamanLogin> {
       },
     );
   }
-
 }
 

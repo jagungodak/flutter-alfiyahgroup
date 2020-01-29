@@ -1,0 +1,4 @@
+class tes{
+
+  //komentar
+}

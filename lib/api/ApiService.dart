@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
 import 'package:alfiyahgroupppsfluter/api/AlfiyahAPI.dart';
-import 'package:alfiyahgroupppsfluter/model/JobModel.dart';
 import 'package:dio/dio.dart';
 
 class ApiService {
@@ -37,7 +36,7 @@ class ApiService {
           data: {}, options: options);
 
       if (response.statusCode == 200 || response.statusCode == 201) {
-        var  responseJson = json.decode(response.data);
+        var responseJson = json.decode(response.data);
         return responseJson;
       } else if (response.statusCode == 401) {
         throw Exception("Incorrect Email/Password");
