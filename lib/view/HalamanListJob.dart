@@ -1,9 +1,11 @@
+library bottom_navy_bar;
+
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
-import 'package:alfiyahgroupppsfluter/model/UserModel.dart';
 import 'package:alfiyahgroupppsfluter/view/HalamanLogin.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bottom_navy_bar/bottom_navy_bar.dart';
 
 class HalamanListJob extends StatefulWidget {
   @override
@@ -44,6 +46,31 @@ class HalamanListJobState extends State<HalamanListJob> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      bottomNavigationBar: BottomNavyBar(
+        // use this to remove appBar's elevatio
+        backgroundColor: Colors.blue[900],
+
+        onItemSelected: (index) => setState(() {}),
+        items: [
+          BottomNavyBarItem(
+            icon: Icon(Icons.apps),
+            title: Text('All'),
+            activeColor: Colors.amber,
+          ),
+          BottomNavyBarItem(
+              icon: Icon(Icons.folder),
+              title: Text('Open'),
+              activeColor: Colors.amber),
+          BottomNavyBarItem(
+              icon: Icon(Icons.send),
+              title: Text('Process'),
+              activeColor: Colors.amber),
+          BottomNavyBarItem(
+              icon: Icon(Icons.remove_circle),
+              title: Text('Close'),
+              activeColor: Colors.amber),
+        ],
+      ),
       appBar: new AppBar(
         backgroundColor: Colors.blue[900],
         title: new Text("Alfiyah Group Apps",
@@ -66,24 +93,27 @@ class HalamanListJobState extends State<HalamanListJob> {
         padding: const EdgeInsets.all(10.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Card(
+          return new Material(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Material(
-                  elevation: 20.0,
+                  elevation: 1.0,
                   color: Colors.blue[900],
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      data[index]['nama_group'],
+                      data[index]['nama_group'] +' '+data[index]['status'],
                       style: TextStyle(
                           color: Colors.amber[600],
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
-                    ),
+                          fontSize: 18,
+                          letterSpacing: 1.5),
+                    ) ,
                   ),
                 ),
+                
+                
                 Padding(
                     padding: EdgeInsets.fromLTRB(20, 10.0, 20.0, 20.0),
                     child: Column(
@@ -113,33 +143,30 @@ class HalamanListJobState extends State<HalamanListJob> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     new Container(
-                      width: double.infinity,
                       child: new Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           new RaisedButton(
                             onPressed: () {},
-                            elevation: 20.0,
-                            color: Colors.orange,
-                            child: Text("Lihat Status",
+                            color: Colors.amber,
+                            child: Text("       Detail Job     ",
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.blue[900],
                                     fontSize: 15.0,
-                                    letterSpacing: 1.5)),
+                                    letterSpacing: 1.2)),
                             padding: EdgeInsets.only(left: 20.0, right: 20.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0.0),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
+                            padding: const EdgeInsets.only(left: 0.0),
                             child: new RaisedButton(
                               onPressed: () {},
-                              elevation: 20.0,
                               color: Colors.blue[900],
-                              child: Text("Lihat Status",
+                              child: Text("Opetation Step",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.amber,
                                       fontSize: 15.0,
                                       letterSpacing: 1.5)),
                               padding: EdgeInsets.only(left: 20.0, right: 20),
