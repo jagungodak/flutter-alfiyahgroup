@@ -1,3 +1,4 @@
+import 'package:alfiyahgroupppsfluter/api/AlfiyahAPI.dart';
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
 import 'package:alfiyahgroupppsfluter/model/stepOperasiModel.dart';
 import 'package:flutter/material.dart';
@@ -5,29 +6,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import 'HalamanLogin.dart';
 
-class Parameter{
-  final String id_user;
-  final String id_job;
-  final String id_level_tugas;
-  Parameter(this.id_user,this.id_job,this.id_level_tugas);
 
- 
-}
 
-class StepOperasi extends StatefulWidget {
-Parameter parameter;
-  StepOperasi(
-      {Key key, @required this.parameter, StepOperasiModel step_operasi})
-      : super(key: key);
- 
+ class StepOperasi extends StatefulWidget {
+final String id_user;
+final String id_job;
+final String id_level;
+  const StepOperasi(this.id_user,this.id_job,this.id_level);
+
 
   @override
-  _StepOperasiState createState() => _StepOperasiState(parameter);
+  _StepOperasiState createState() => _StepOperasiState();
 }
 
 class _StepOperasiState extends State<StepOperasi> {
-Parameter parameter;
-_StepOperasiState(Parameter this.parameter);
+
+_StepOperasiState();
 
   List data;
   bool _isLoading = false;
@@ -38,7 +32,8 @@ _StepOperasiState(Parameter this.parameter);
 
   getData() async {
     setState(() => _isLoading = true);
-    var src = await ApiService().getStepOperasi(parameter.id_user, parameter.id_job, parameter.id_level_tugas);
+    var src = await ApiService().getStepOperasi(widget.id_user, widget.id_job, widget.id_level);
+
     setState(() => _isLoading = false);
     data = src['step_operasi'];
     print(data);

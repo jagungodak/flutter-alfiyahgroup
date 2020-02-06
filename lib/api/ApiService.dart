@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:async';
 import 'dart:io';
+import 'dart:math';
 import 'package:alfiyahgroupppsfluter/api/AlfiyahAPI.dart';
 import 'package:dio/dio.dart';
 
@@ -74,7 +75,6 @@ Future<dynamic> getStepOperasi(String id_job, String id_user, String id_level) a
 
       Response response = await AlfiyahAPI.dio.post(AlfiyahAPI.getStepOperasi(id_user, id_job, id_level),
           data: {}, options: options);
-
       if (response.statusCode == 200 || response.statusCode == 201) {
         var responseJson = json.decode(response.data);
         return responseJson;

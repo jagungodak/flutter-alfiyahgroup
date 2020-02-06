@@ -1,5 +1,7 @@
 library bottom_navy_bar;
 
+import 'dart:developer';
+
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
 
 import 'package:alfiyahgroupppsfluter/view/HalamanLogin.dart';
@@ -168,11 +170,10 @@ class HalamanListJobState extends State<HalamanListJob> {
                             padding: const EdgeInsets.only(left: 0.0),
                             child: new RaisedButton(
                               onPressed: ()  {
-                                Parameter pr=new Parameter(id_user, id_job, id_level_tugas);
-                                  Navigator.of(context).push(
+                                 Navigator.of(context).push(
                                       MaterialPageRoute<Null>(
                                           builder: (BuildContext context) {
-                                    return new StepOperasi(parameter: pr);
+                                    return new StepOperasi( data[index]['id_user'],data[index]['id_job'],data[index]['id_level_tugas']);
                                   }));
                                 
                               },

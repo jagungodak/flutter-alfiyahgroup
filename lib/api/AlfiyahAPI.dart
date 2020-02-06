@@ -21,13 +21,7 @@ class AlfiyahAPI {
   }
 
   static String getStepOperasi(String id_job, String id_user, String id_level) {
-    return
-      "api/step_operasi/" +
-        id_user +
-        "/" +
-        id_job +
-        "/" +
-        id_level;
+    return "api/step_operasi/" +id_user +"/" +id_job +"/" +id_level;
   }
 
   static String getCariJob(String id_user, String kata) {
