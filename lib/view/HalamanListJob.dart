@@ -1,11 +1,15 @@
+library bottom_navy_bar;
+
 import 'package:alfiyahgroupppsfluter/api/ApiService.dart';
-import 'package:alfiyahgroupppsfluter/model/UserModel.dart';
+
 import 'package:alfiyahgroupppsfluter/view/HalamanLogin.dart';
+import 'package:alfiyahgroupppsfluter/view/OperationStep.dart';
 import 'package:flutter/material.dart';
 import 'package:auto_size_text/auto_size_text.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HalamanListJob extends StatefulWidget {
+
   @override
   HalamanListJobState createState() => new HalamanListJobState();
 }
@@ -13,6 +17,11 @@ class HalamanListJob extends StatefulWidget {
 class HalamanListJobState extends State<HalamanListJob> {
   bool _isLoading = false;
   List data;
+  String id_user;
+  String id_level_tugas;
+ String id_job;
+
+  
 
   SharedPreferences sharedPreferences;
   @override
@@ -44,6 +53,30 @@ class HalamanListJobState extends State<HalamanListJob> {
   @override
   Widget build(BuildContext context) {
     return new Scaffold(
+      bottomNavigationBar: BottomAppBar(
+        child: new Row(
+          children: <Widget>[
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.home, color: Colors.black54),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.folder_open, color: Colors.black54),
+                onPressed: () {},
+              ),
+            ),
+            Expanded(
+              child: IconButton(
+                icon: Icon(Icons.person, color: Colors.black54),
+                onPressed: () {},
+              ),
+            ),
+          ],
+        ),
+      ),
       appBar: new AppBar(
         backgroundColor: Colors.blue[900],
         title: new Text("Alfiyah Group Apps",
@@ -63,24 +96,26 @@ class HalamanListJobState extends State<HalamanListJob> {
         ],
       ),
       body: new ListView.builder(
-        padding: const EdgeInsets.all(10.0),
+        padding: const EdgeInsets.only(
+            bottom: 10.0, top: 3.0, left: 3.0, right: 3.0),
         itemCount: data == null ? 0 : data.length,
         itemBuilder: (BuildContext context, int index) {
-          return new Card(
+          return new Material(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.stretch,
               children: <Widget>[
                 Material(
-                  elevation: 20.0,
+                  elevation: 1.0,
                   color: Colors.blue[900],
                   child: Padding(
                     padding: const EdgeInsets.all(10.0),
                     child: Text(
-                      data[index]['nama_group'],
+                      data[index]['nama_group'] + ' ' + data[index]['status'],
                       style: TextStyle(
                           color: Colors.amber[600],
                           fontWeight: FontWeight.bold,
-                          fontSize: 18),
+                          fontSize: 18,
+                          letterSpacing: 1.5),
                     ),
                   ),
                 ),
@@ -113,33 +148,38 @@ class HalamanListJobState extends State<HalamanListJob> {
                   crossAxisAlignment: CrossAxisAlignment.stretch,
                   children: <Widget>[
                     new Container(
-                      width: double.infinity,
                       child: new Row(
                         mainAxisAlignment: MainAxisAlignment.center,
                         children: <Widget>[
                           new RaisedButton(
                             onPressed: () {},
-                            elevation: 20.0,
-                            color: Colors.orange,
-                            child: Text("Lihat Status",
+                            color: Colors.amber,
+                            child: Text("       Detail Job     ",
                                 style: TextStyle(
-                                    color: Colors.white,
+                                    color: Colors.blue[900],
                                     fontSize: 15.0,
-                                    letterSpacing: 1.5)),
+                                    letterSpacing: 1.2)),
                             padding: EdgeInsets.only(left: 20.0, right: 20.0),
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(0.0),
                             ),
                           ),
                           Padding(
-                            padding: const EdgeInsets.only(left: 10.0),
+                            padding: const EdgeInsets.only(left: 0.0),
                             child: new RaisedButton(
-                              onPressed: () {},
-                              elevation: 20.0,
+                              onPressed: ()  {
+                                Parameter pr=new Parameter(id_user, id_job, id_level_tugas);
+                                  Navigator.of(context).push(
+                                      MaterialPageRoute<Null>(
+                                          builder: (BuildContext context) {
+                                    return new StepOperasi(parameter: pr);
+                                  }));
+                                
+                              },
                               color: Colors.blue[900],
-                              child: Text("Lihat Status",
+                              child: Text("Opetation Step",
                                   style: TextStyle(
-                                      color: Colors.white,
+                                      color: Colors.amber,
                                       fontSize: 15.0,
                                       letterSpacing: 1.5)),
                               padding: EdgeInsets.only(left: 20.0, right: 20),

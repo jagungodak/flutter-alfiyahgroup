@@ -6,7 +6,7 @@ import 'package:alfiyahgroupppsfluter/view/HalamanListJob.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:alfiyahgroupppsfluter/utils.dart';
+
 
 class HalamanLogin extends StatefulWidget {
   @override
@@ -27,7 +27,7 @@ class _LoginPageState extends State<HalamanLogin> {
       body: Container(
         decoration: BoxDecoration(
           gradient: LinearGradient(
-              colors: [Colors.blue, Colors.teal],
+              colors: [Colors.blue[700], Colors.blue[900]],
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter),
         ),
